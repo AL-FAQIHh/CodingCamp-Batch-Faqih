@@ -1,0 +1,490 @@
+/* =============================================================
+   CSS Custom Properties — Theme Variables
+   ============================================================= */
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f5f5;
+  --text-primary: #1a1a1a;
+  --text-secondary: #555555;
+  --accent: #4f46e5;
+  --accent-hover: #3730a3;
+  --border: #e0e0e0;
+  --danger: #dc2626;
+  --danger-bg: #fef2f2;
+  --danger-border: #fecaca;
+  --success: #16a34a;
+  --success-hover: #15803d;
+  --neutral: #6b7280;
+  --neutral-hover: #4b5563;
+  --muted-text: #9ca3af;
+}
+
+[data-theme="dark"] {
+  --bg-primary: #1a1a2e;
+  --bg-secondary: #16213e;
+  --text-primary: #e0e0e0;
+  --text-secondary: #a0a0a0;
+  --accent: #7c73e6;
+  --accent-hover: #6b63d6;
+  --border: #333366;
+  --danger: #f87171;
+  --danger-bg: #3b1515;
+  --danger-border: #7f1d1d;
+  --success: #4ade80;
+  --success-hover: #22c55e;
+  --neutral: #9ca3af;
+  --neutral-hover: #6b7280;
+  --muted-text: #6b7280;
+}
+
+/* =============================================================
+   CSS Reset & Base
+   ============================================================= */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  min-height: 100vh;
+}
+
+/* =============================================================
+   Header / App Bar
+   ============================================================= */
+header {
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  font-size: 1.25rem;
+  color: var(--text-primary);
+}
+
+/* =============================================================
+   Dashboard Grid Layout
+   ============================================================= */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  gap: 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+/* Greeting widget spans full width across both columns */
+#greeting-widget {
+  grid-column: 1 / -1;
+}
+
+/* =============================================================
+   Widget Base Styling
+   ============================================================= */
+.widget,
+#greeting-widget,
+#timer-widget,
+#todo-widget,
+#quicklinks-widget {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.widget h3,
+#greeting-widget h2,
+#timer-widget h2,
+#todo-widget h3,
+#quicklinks-widget h3 {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+}
+
+/* =============================================================
+   Responsive Breakpoint — Mobile (<768px): single column
+   ============================================================= */
+@media (max-width: 767px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #greeting-widget {
+    grid-column: 1;
+  }
+}
+
+/* =============================================================
+   Shared Input & Button Base Styles
+   ============================================================= */
+input[type="text"] {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+input[type="text"]:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.15);
+}
+
+button {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background-color: var(--accent);
+  color: var(--bg-primary);
+  transition: background-color 0.2s, opacity 0.2s;
+}
+
+button:hover:not(:disabled) {
+  background-color: var(--accent-hover);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* =============================================================
+   Greeting Widget — Detail Styles
+   ============================================================= */
+#time {
+  font-size: 2.75rem;
+  font-weight: 700;
+  font-family: "Courier New", Courier, monospace;
+  letter-spacing: 0.05em;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+#date {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+#greeting {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.name-input-area {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.name-input-area input[type="text"] {
+  flex: 1;
+  min-width: 160px;
+}
+
+/* =============================================================
+   Focus Timer Widget — Detail Styles
+   ============================================================= */
+#timer-display {
+  font-size: 3.5rem;
+  font-weight: 700;
+  font-family: "Courier New", Courier, monospace;
+  text-align: center;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+  margin-bottom: 1.25rem;
+}
+
+.timer-controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+#timer-start {
+  background-color: var(--success);
+}
+
+#timer-start:hover:not(:disabled) {
+  background-color: var(--success-hover);
+}
+
+#timer-stop {
+  background-color: var(--danger);
+}
+
+#timer-stop:hover:not(:disabled) {
+  background-color: #b91c1c;
+}
+
+#timer-reset {
+  background-color: var(--neutral);
+}
+
+#timer-reset:hover:not(:disabled) {
+  background-color: var(--neutral-hover);
+}
+
+/* =============================================================
+   To-Do List Widget — Detail Styles
+   ============================================================= */
+.todo-input-area {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.todo-input-area input[type="text"] {
+  flex: 1;
+  min-width: 160px;
+}
+
+#todo-duplicate-warning {
+  color: var(--danger);
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+  padding: 0.4rem 0.6rem;
+  background-color: var(--danger-bg);
+  border: 1px solid var(--danger-border);
+  border-radius: 6px;
+}
+
+#todo-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.todo-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.todo-item:last-child {
+  border-bottom: none;
+}
+
+.todo-item.completed .todo-text {
+  text-decoration: line-through;
+  color: var(--muted-text);
+}
+
+.todo-text {
+  flex: 1;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  word-break: break-word;
+}
+
+/* Inline edit input */
+.todo-edit-input {
+  flex: 1;
+  padding: 0.35rem 0.6rem;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  outline: none;
+  min-width: 0;
+}
+
+.todo-edit-input:focus {
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.15);
+}
+
+/* Compact action buttons inside todo items */
+.todo-toggle,
+.todo-edit,
+.todo-delete,
+.todo-save,
+.todo-cancel {
+  padding: 0.25rem 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 5px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.todo-toggle {
+  background-color: var(--accent);
+  color: var(--bg-primary);
+}
+
+.todo-toggle:hover {
+  background-color: var(--accent-hover);
+}
+
+.todo-edit {
+  background-color: #f3f4f6;
+  color: #374151;
+  border: 1px solid #d1d5db;
+}
+
+.todo-edit:hover {
+  background-color: #e5e7eb;
+}
+
+.todo-delete {
+  background-color: var(--danger-bg);
+  color: var(--danger);
+  border: 1px solid var(--danger-border);
+}
+
+.todo-delete:hover {
+  background-color: #fee2e2;
+}
+
+.todo-save {
+  background-color: var(--success);
+  color: var(--bg-primary);
+}
+
+.todo-save:hover {
+  background-color: var(--success-hover);
+}
+
+.todo-cancel {
+  background-color: #f3f4f6;
+  color: #374151;
+  border: 1px solid #d1d5db;
+}
+
+.todo-cancel:hover {
+  background-color: #e5e7eb;
+}
+
+/* =============================================================
+   Quick Links Widget — Detail Styles
+   ============================================================= */
+.quicklinks-input-area {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.quicklinks-input-area input[type="text"] {
+  flex: 1;
+  min-width: 120px;
+}
+
+#quicklinks-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.link-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.link-item:last-child {
+  border-bottom: none;
+}
+
+.link-item a {
+  text-decoration: none;
+  color: var(--accent);
+  font-size: 0.95rem;
+  flex: 1;
+  word-break: break-all;
+  transition: color 0.15s;
+}
+
+.link-item a:hover {
+  text-decoration: underline;
+  color: var(--accent-hover);
+}
+
+.link-delete {
+  padding: 0.25rem 0.6rem;
+  font-size: 0.8rem;
+  background-color: var(--danger-bg);
+  color: var(--danger);
+  border: 1px solid var(--danger-border);
+  border-radius: 5px;
+  flex-shrink: 0;
+}
+
+.link-delete:hover {
+  background-color: #fee2e2;
+}
+
+/* =============================================================
+   Mobile Adjustments for Widget Detail Styles (<768px)
+   ============================================================= */
+@media (max-width: 767px) {
+  #time {
+    font-size: 2rem;
+  }
+
+  #timer-display {
+    font-size: 2.75rem;
+  }
+
+  .quicklinks-input-area {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .quicklinks-input-area input[type="text"],
+  .quicklinks-input-area button {
+    width: 100%;
+  }
+
+  .name-input-area {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .name-input-area input[type="text"],
+  .name-input-area button {
+    width: 100%;
+  }
+}

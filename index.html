@@ -1,22 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Productivity Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <header>
+        <button id="theme-toggle" aria-label="Ganti tema">🌙 Dark Mode</button>
+    </header>
 
-        <div class="container-greeting">
+    <main>
+        <div class="dashboard-grid">
 
-            <h1 id="time"></h1>
-            <p id="date"></p>
+            <!-- GREETING WIDGET -->
+            <section id="greeting-widget">
+                <h1 id="time"></h1>
+                <p id="date"></p>
+                <h2 id="greeting"></h2>
+                <div class="name-input-area">
+                    <input type="text" id="name-input" placeholder="Masukkan nama Anda..." />
+                    <button id="name-save">Simpan</button>
+                </div>
+            </section>
+
+            <!-- FOCUS TIMER WIDGET -->
+            <section id="timer-widget">
+                <div id="timer-display">25:00</div>
+                <div class="timer-controls">
+                    <button id="timer-start">Start</button>
+                    <button id="timer-stop">Stop</button>
+                    <button id="timer-reset">Reset</button>
+                </div>
+            </section>
+
+            <!-- TO-DO LIST WIDGET -->
+            <section id="todo-widget">
+                <div class="todo-header">
+                    <h3>To-Do List (<span id="todo-count">0</span> tugas tersisa)</h3>
+                </div>
+                <div class="todo-input-area">
+                    <input type="text" id="todo-input" placeholder="Tambah tugas baru..." />
+                    <button id="todo-add">Tambah</button>
+                </div>
+                <p id="todo-duplicate-warning" style="display:none;" aria-live="polite"></p>
+                <ul id="todo-list"></ul>
+            </section>
+
+            <!-- QUICK LINKS WIDGET -->
+            <section id="quicklinks-widget">
+                <h3>Quick Links</h3>
+                <div class="quicklinks-input-area">
+                    <input type="text" id="link-label-input" placeholder="Label (contoh: Google)" />
+                    <input type="text" id="link-url-input" placeholder="URL (contoh: https://google.com)" />
+                    <button id="link-add">Tambah</button>
+                </div>
+                <ul id="quicklinks-list"></ul>
+            </section>
 
         </div>
-        
-    </header>
-    <script src="main.js"></script>
+    </main>
+
+    <script src="js/main.js" defer></script>
 </body>
 </html>
